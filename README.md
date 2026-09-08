@@ -149,9 +149,7 @@ row $r$ alone.
 
 ### `disorder`: averaging over placements
 
-The arrangement of traps is random, so a second expectation sits outside the one in $t_i$:
-$\mathbb{E}_{\text{paths}}$ averages over walks at a fixed arrangement,
-$\mathbb{E}_{\text{traps}}$ over the arrangements.
+The traps are randomly placed, so the average accounts for both the possible particle walks and the different trap arrangements, with the walks averaged for each fixed arrangement.
 
 ```math
 \langle t_i \rangle = \mathbb{E}_{\text{traps}}\,\mathbb{E}_{\text{paths}}\big[T \mid X_0 = S_i\big]
