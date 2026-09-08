@@ -1,0 +1,40 @@
+SYMBOLS
+
+variable : value / dim
+
+L        : 50                         lattice edge; L x L = 2500 sites, L(L-1) = 2450 interior
+row 0    : absorbing                  the escape edge; the other three reflect
+sides    : reflecting                 other three edges; no neighbour outside
+r        : 1 .. L-1                   row index, distance from the absorbing edge
+z_i      : 4, 3 or 2                  coordination: 4 bulk, 3 edge, 2 corner. sum_i z_i = 4L(L-1)
+
+E_a,i    : E_mig, or E_mig + E_b, eV       activation energy for a jump from site i
+kT       : 0.150, 0.100, 0.075, 0.060 eV   set by E_b/kT
+E_b/kT   : 2, 3, 4, 5                      combinations the physics depends on
+tau_i    : e^(E_a,i/kT)/(z_i nu), s        mean wait at site i
+tau_0    : e^(E_mig/kT)/nu, s              the wait with z_i divided out; z_i tau_i is then constant off-trap, so t(r) is solvable
+
+P        : 2451 x 2451                full transition matrix, [[Q, a], [0, 1]]; interior first, surface last
+p_n      : dimensionless              site distribution after n jumps, p_(n+1) = p_n P
+Q        : jump chain, 2450 x 2450    Q_ij = 1/z_i onto interior neighbours; row sums to 1 - a_i
+a        : dimensionless              chance of escaping on the next jump
+
+N        : (I - Q)^-1                 fundamental matrix; N_ij = mean visits to j before absorption from i. Never formed
+t_i      : s                          mean escape time from site i, t = N tau
+
+c        : 8e-4 to 0.98, log-spaced   trap density; round(c L^2) sites are traps, so c is exact
+<t>      : s                          t averaged over sites and trap placements
+G        : 12.244 ns at kT = 0.1 eV   geometry factor, sum_j N_ij e^(E_mig/kT)/(z_j nu); trap-free escape time
+
+beta     : 1/kT, eV^-1                fit over +-10% about each E_b/kT, 9 points
+E_a,eff  : E_mig + E_b f, eV          effective activation energy, d ln<t>/d beta
+f        : (E_a,eff - E_mig)/E_b      fraction of time trapped; 0 dilute, 1 dense
+c*       : 1/(1 + e^(E_b/kT))         crossover density, where f = 1/2
+
+M        : 3 to 20                    1D test chain length, absorbing both ends
+T        : 40                         wait time of the one hand-placed trap; other M-1 sites wait 1
+cond     : 10608                      cond_1(I - Q); eps*cond = 2.4e-12 bounds the solve
+
+NU       : 1.0e13 s^-1                attempt frequency, nu
+E_mig    : 0.5 eV                     migration barrier, normal site
+E_b      : 0.3 eV                     trap binding energy, added to E_mig on a trap

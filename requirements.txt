@@ -1,0 +1,4 @@
+# verified on python 3.14.6
+numpy>=2.0
+scipy>=1.12
+matplotlib>=3.8
