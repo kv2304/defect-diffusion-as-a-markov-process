@@ -1,6 +1,8 @@
 # python
 __pycache__/
 *.pyc
+venv/
+.venv/
 
 # editor and OS
 .vscode/
